@@ -4,15 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{visage-app}
-  s.version = "0.9.6"
+  s.name = "brodock-visage-app"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Lindsay Holmwood"]
-  s.date = %q{2011-05-11}
-  s.default_executable = %q{visage-app}
-  s.description = %q{Visage is a web interface for viewing collectd statistics. It also provides a JSON interface onto collectd's RRD data, giving you an easy way to mash up the data.}
-  s.email = %q{lindsay@holmwood.id.au}
+  s.authors = ["Lindsay Holmwood", "Gabriel Mazetto"]
+  s.date = "2012-03-22"
+  s.description = "Visage is a web interface for viewing collectd statistics. It also provides a JSON interface onto collectd's RRD data, giving you an easy way to mash up the data."
+  s.email = "brodock@gmail.com"
   s.executables = ["visage-app"]
   s.extra_rdoc_files = [
     "README.md"
@@ -41,7 +40,6 @@ Gem::Specification.new do |s|
     "features/support/env.rb",
     "lib/visage-app.rb",
     "lib/visage-app/collectd/json.rb",
-    "lib/visage-app/collectd/profile.rb",
     "lib/visage-app/collectd/rrds.rb",
     "lib/visage-app/config.rb",
     "lib/visage-app/config.ru",
@@ -53,19 +51,28 @@ Gem::Specification.new do |s|
     "lib/visage-app/public/favicon.gif",
     "lib/visage-app/public/images/active.png",
     "lib/visage-app/public/images/add.png",
+    "lib/visage-app/public/images/caution.png",
     "lib/visage-app/public/images/hosts.png",
     "lib/visage-app/public/images/loader.gif",
     "lib/visage-app/public/images/metrics.png",
+    "lib/visage-app/public/images/ok.png",
+    "lib/visage-app/public/images/questions.png",
     "lib/visage-app/public/images/search.png",
+    "lib/visage-app/public/javascripts/builder.js",
     "lib/visage-app/public/javascripts/graph.js",
     "lib/visage-app/public/javascripts/highcharts.js",
     "lib/visage-app/public/javascripts/highcharts.src.js",
     "lib/visage-app/public/javascripts/keyboard.js",
+    "lib/visage-app/public/javascripts/message.js",
     "lib/visage-app/public/javascripts/mootools-1.2.3-core.js",
     "lib/visage-app/public/javascripts/mootools-1.2.5.1-more.js",
+    "lib/visage-app/public/javascripts/mootools-core-1.4.0-full-compat.js",
+    "lib/visage-app/public/javascripts/mootools-more-1.4.0.1.js",
+    "lib/visage-app/public/stylesheets/message.css",
     "lib/visage-app/public/stylesheets/screen.css",
     "lib/visage-app/types.rb",
     "lib/visage-app/views/builder.haml",
+    "lib/visage-app/views/builder_form.haml",
     "lib/visage-app/views/layout.haml",
     "lib/visage-app/views/profile.haml",
     "lib/visage-app/views/profiles.haml",
@@ -73,20 +80,20 @@ Gem::Specification.new do |s|
     "man/visage-app.5.ronn",
     "visage-app.gemspec"
   ]
-  s.homepage = %q{http://visage-app.com/}
+  s.homepage = "http://visage-app.com/"
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
-  s.summary = %q{a web (interface | service) for viewing collectd statistics}
+  s.required_ruby_version = Gem::Requirement.new(">= 1.9.3")
+  s.rubygems_version = "1.8.11"
+  s.summary = "a web (interface | service) for viewing collectd statistics"
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<haml>, [">= 0"])
       s.add_runtime_dependency(%q<tilt>, [">= 0"])
       s.add_runtime_dependency(%q<sinatra>, [">= 0"])
-      s.add_runtime_dependency(%q<errand>, [">= 0"])
+      s.add_runtime_dependency(%q<errand>, ["= 0.7.3"])
       s.add_runtime_dependency(%q<yajl-ruby>, [">= 0"])
       s.add_development_dependency(%q<shotgun>, [">= 0"])
       s.add_development_dependency(%q<rack-test>, [">= 0"])
@@ -94,16 +101,17 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<cucumber>, [">= 0"])
       s.add_development_dependency(%q<webrat>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
-      s.add_runtime_dependency(%q<sinatra>, ["~> 1.1.3"])
-      s.add_runtime_dependency(%q<tilt>, ["~> 1.2.2"])
-      s.add_runtime_dependency(%q<haml>, ["~> 3.0.13"])
-      s.add_runtime_dependency(%q<errand>, ["~> 0.7.2"])
-      s.add_runtime_dependency(%q<yajl-ruby>, ["~> 0.8.1"])
+      s.add_runtime_dependency(%q<sinatra>, ["~> 1.3.2"])
+      s.add_runtime_dependency(%q<tilt>, ["~> 1.3"])
+      s.add_runtime_dependency(%q<haml>, ["~> 3.1.4"])
+      s.add_runtime_dependency(%q<errand>, ["= 0.7.3"])
+      s.add_runtime_dependency(%q<yajl-ruby>, ["~> 1.1.0"])
+      s.add_runtime_dependency(%q<librrd>, ["~> 1.0.2"])
     else
       s.add_dependency(%q<haml>, [">= 0"])
       s.add_dependency(%q<tilt>, [">= 0"])
       s.add_dependency(%q<sinatra>, [">= 0"])
-      s.add_dependency(%q<errand>, [">= 0"])
+      s.add_dependency(%q<errand>, ["= 0.7.3"])
       s.add_dependency(%q<yajl-ruby>, [">= 0"])
       s.add_dependency(%q<shotgun>, [">= 0"])
       s.add_dependency(%q<rack-test>, [">= 0"])
@@ -111,17 +119,18 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cucumber>, [">= 0"])
       s.add_dependency(%q<webrat>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
-      s.add_dependency(%q<sinatra>, ["~> 1.1.3"])
-      s.add_dependency(%q<tilt>, ["~> 1.2.2"])
-      s.add_dependency(%q<haml>, ["~> 3.0.13"])
-      s.add_dependency(%q<errand>, ["~> 0.7.2"])
-      s.add_dependency(%q<yajl-ruby>, ["~> 0.8.1"])
+      s.add_dependency(%q<sinatra>, ["~> 1.3.2"])
+      s.add_dependency(%q<tilt>, ["~> 1.3"])
+      s.add_dependency(%q<haml>, ["~> 3.1.4"])
+      s.add_dependency(%q<errand>, ["= 0.7.3"])
+      s.add_dependency(%q<yajl-ruby>, ["~> 1.1.0"])
+      s.add_dependency(%q<librrd>, ["~> 1.0.2"])
     end
   else
     s.add_dependency(%q<haml>, [">= 0"])
     s.add_dependency(%q<tilt>, [">= 0"])
     s.add_dependency(%q<sinatra>, [">= 0"])
-    s.add_dependency(%q<errand>, [">= 0"])
+    s.add_dependency(%q<errand>, ["= 0.7.3"])
     s.add_dependency(%q<yajl-ruby>, [">= 0"])
     s.add_dependency(%q<shotgun>, [">= 0"])
     s.add_dependency(%q<rack-test>, [">= 0"])
@@ -129,11 +138,12 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cucumber>, [">= 0"])
     s.add_dependency(%q<webrat>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
-    s.add_dependency(%q<sinatra>, ["~> 1.1.3"])
-    s.add_dependency(%q<tilt>, ["~> 1.2.2"])
-    s.add_dependency(%q<haml>, ["~> 3.0.13"])
-    s.add_dependency(%q<errand>, ["~> 0.7.2"])
-    s.add_dependency(%q<yajl-ruby>, ["~> 0.8.1"])
+    s.add_dependency(%q<sinatra>, ["~> 1.3.2"])
+    s.add_dependency(%q<tilt>, ["~> 1.3"])
+    s.add_dependency(%q<haml>, ["~> 3.1.4"])
+    s.add_dependency(%q<errand>, ["= 0.7.3"])
+    s.add_dependency(%q<yajl-ruby>, ["~> 1.1.0"])
+    s.add_dependency(%q<librrd>, ["~> 1.0.2"])
   end
 end
 

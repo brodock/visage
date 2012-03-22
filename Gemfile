@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 source :rubygems
+gemspec
 
 gem "haml"
 gem "tilt"

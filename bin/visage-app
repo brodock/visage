@@ -6,7 +6,7 @@ require 'socket'
 fqdn = Socket.gethostbyname(Socket.gethostname).first
 port = 9292
 $stdout.sync = true
-@root = (Pathname.new(__FILE__).parent.parent + 'lib').expand_path
+@root = (Pathname.new(__FILE__).parent).expand_path
 $: << @root.to_s
 action = ARGV[0]
 
@@ -40,7 +40,7 @@ when "start"
   puts "Looking for RRDs in #{Visage::Config.rrddir}"
   puts
 
-  config = (@root + 'lib/visage-app/config.ru').to_s
+  config = (@root + 'config.ru').to_s
   server = Rack::Server.new(:config => config, :Port => port, :server => "webrick")
   server.start
 when "genapache"

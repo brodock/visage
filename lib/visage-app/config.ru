@@ -1,8 +1,12 @@
 #!/usr/bin/env ruby
+require 'rubygems'
+require 'bundler/setup'
 
+Bundler.require(:default)
 require 'pathname'
+
 @root = Pathname.new(File.dirname(__FILE__)).parent.parent.expand_path
-$: << @root.to_s
+$:.unshift(@root.to_s)
 
 $0 = "visage"
 
