@@ -8,6 +8,7 @@ module Visage
   class Config
     class File
       @@config_directories = []
+      @@config_directories << Pathname.new(::File.dirname(__FILE__)).parent.parent.parent.expand_path
       @@config_directories << Pathname.new(::File.dirname(__FILE__)).expand_path
       @@config_directories << Pathname.new(ENV["CONFIG_PATH"]).expand_path if ENV["CONFIG_PATH"]
       @@config_directories.reverse!
